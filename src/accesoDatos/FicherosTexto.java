@@ -92,13 +92,14 @@ public class FicherosTexto implements I_Acceso_Datos {
 		boolean todoOK = false;
 		try {
 			PrintWriter writer = new PrintWriter("Ficheros/datos/depositos.txt");
+			writer.flush();
 			writer.close();
 			Iterator it = depositos.entrySet().iterator();
 			while (it.hasNext()) {
 				Map.Entry e = (Map.Entry) it.next();
-				PrintWriter escr = new PrintWriter(new FileWriter("Ficheros/datos/depositos.txt"));
+				PrintWriter escr = new PrintWriter(new FileWriter("Ficheros/datos/depositos.txt", true));
 				Deposito a = (Deposito) e.getValue();
-				escr.print(a.getNombreMoneda() + a.getValor() + a.getCantidad());
+				escr.print(a.getNombreMoneda() + ";" + a.getValor() + ";" + a.getCantidad() + "\n");
 				escr.close();
 				it.remove();
 			}
@@ -121,13 +122,15 @@ public class FicherosTexto implements I_Acceso_Datos {
 		boolean todoOK = false;
 		try {
 			PrintWriter writer = new PrintWriter("Ficheros/datos/dispensadores.txt");
+			writer.flush();
 			writer.close();
 			Iterator it = dispensadores.entrySet().iterator();
 			while (it.hasNext()) {
 				Map.Entry e = (Map.Entry) it.next();
-				PrintWriter escr = new PrintWriter(new FileWriter("Ficheros/datos/dispensadores.txt"));
+				PrintWriter escr = new PrintWriter(new FileWriter("Ficheros/datos/dispensadores.txt", true));
 				Dispensador a = (Dispensador) e.getValue();
-				escr.print(a.getClave() + a.getNombreProducto() + a.getPrecio() + a.getCantidad());
+				escr.print(a.getClave() + ";" + a.getNombreProducto() + ";" + a.getPrecio() + ";" + a.getCantidad()
+						+ "\n");
 				escr.close();
 				it.remove();
 			}

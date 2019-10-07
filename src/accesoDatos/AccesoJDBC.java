@@ -121,28 +121,28 @@ public class AccesoJDBC implements I_Acceso_Datos {
 	@Override
 	public boolean guardarDepositos(HashMap<Integer, Deposito> depositos) {
 		boolean todoOK = false;
-//		try {
-//			Statement statement = conn1.createStatement();
-//			statement.executeUpdate("TRUNCATE depositos");
-//			Iterator it = depositos.entrySet().iterator();
-//			int i = 0;
-//			while (it.hasNext()) {
-//				Map.Entry e = (Map.Entry) it.next();
-//				PreparedStatement pstmt;
-//				Deposito a = (Deposito) e.getValue();
-//				String query = "INSERT INTO depositos (nombre,precio,cantidad)" + "values ( ?,?,?)";
-//				pstmt = conn1.prepareStatement(query);
-//				pstmt.setString(1, a.getNombreMoneda());
-//				pstmt.setInt(2, a.getValor());
-//				pstmt.setInt(3, a.getCantidad());
-//				pstmt.executeUpdate();
-//				it.remove();
-//			}
-//			todoOK = true;
-//		} catch (SQLException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
+		try {
+			PreparedStatement pstmt = conn1.prepareStatement("TRUNCATE depositos");
+			pstmt.executeUpdate();
+			pstmt.close();
+			Iterator it = depositos.entrySet().iterator();
+			while (it.hasNext()) {
+				Map.Entry e = (Map.Entry) it.next();
+				Deposito a = (Deposito) e.getValue();
+				String nombre = a.getNombreMoneda();
+				int valor = a.getValor();
+				int cantidad = a.getCantidad();
+				Statement statement = conn1.createStatement();
+				String query = "INSERT INTO depositos (nombre, valor, cantidad)  values ('" + nombre + "','" + valor
+						+ "','" + cantidad + "')";
+				statement.executeUpdate(query);
+				it.remove();
+			}
+			todoOK = true;
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		return todoOK;
 
@@ -152,29 +152,29 @@ public class AccesoJDBC implements I_Acceso_Datos {
 	public boolean guardarDispensadores(HashMap<String, Dispensador> dispensadores) {
 
 		boolean todoOK = false;
-//		try {
-//			Statement statement = conn1.createStatement();
-//			statement.executeUpdate("TRUNCATE dispensadores");
-//			Iterator it = dispensadores.entrySet().iterator();
-//			int i = 0;
-//			while (it.hasNext()) {
-//				Map.Entry e = (Map.Entry) it.next();
-//				PreparedStatement pstmt;
-//				Dispensador a = (Dispensador) e.getValue();
-//				String query = "INSERT INTO dispensadores (clave, nombre,precio,cantidad)" + "values ( ?, ?,?,?)";
-//				pstmt = conn1.prepareStatement(query);
-//				pstmt.setString(1, a.getClave());
-//				pstmt.setString(2, a.getNombreProducto());
-//				pstmt.setInt(3, a.getPrecio());
-//				pstmt.setInt(4, a.getCantidad());
-//				pstmt.executeUpdate();
-//				it.remove();
-//			}
-//			todoOK = true;
-//		} catch (SQLException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
+		try {
+			PreparedStatement pstmt = conn1.prepareStatement("TRUNCATE dispensadores");
+			pstmt.executeUpdate();
+			pstmt.close();
+			Iterator it = dispensadores.entrySet().iterator();
+			while (it.hasNext()) {
+				Map.Entry e = (Map.Entry) it.next();
+				Dispensador a = (Dispensador) e.getValue();
+				String nombre = a.getNombreProducto();
+				String clave = a.getClave();
+				int precio = a.getPrecio();
+				int cantidad = a.getCantidad();
+				Statement statement = conn1.createStatement();
+				String query = "INSERT INTO dispensadores (clave, nombre, precio, cantidad)  values ('" + clave + "','"
+						+ nombre + "','" + precio + "','" + cantidad + "')";
+				statement.executeUpdate(query);
+				it.remove();
+			}
+			todoOK = true;
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		return todoOK;
 	}
