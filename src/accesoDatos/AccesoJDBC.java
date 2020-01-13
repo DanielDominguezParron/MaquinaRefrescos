@@ -85,7 +85,6 @@ public class AccesoJDBC implements I_Acceso_Datos {
 				int cantidad = rs.getInt(4);
 				deposito = new Deposito(nombre, id, cantidad);
 				depositosCreados.put(id, deposito);
-				System.out.println(deposito.toString());
 			}
 		} catch (Exception e) {
 			System.out.println("Error Conexion");
@@ -109,7 +108,6 @@ public class AccesoJDBC implements I_Acceso_Datos {
 				int cantidad = rs.getInt(5);
 				dispensador = new Dispensador(clave, nombre, valor, cantidad);
 				dispensadoresCreados.put(clave, dispensador);
-				System.out.println(dispensador.toString());
 			}
 		} catch (Exception e) {
 			System.out.println("Error Conexion");
